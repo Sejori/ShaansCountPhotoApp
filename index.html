@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shaan's Count App</title>
+</head>
+<body style="width: 100vw; height: 100vh; display: flex; font-family: Arial, Helvetica, sans-serif;">
+    <div style="margin: auto;">
+        <div style="display: flex; justify-content: space-evenly;">
+            <div>
+                <p>Input number 1:</p>
+                <select id="input1" onChange="calculate()">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <div>
+                <p>Input number 2:</p>
+                <select id="input2" onChange="calculate()">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+        </div>
+        <iframe id="output-image" src="" alt="output-image" style="margin: 1rem; width: 300px; height: 240px;"></iframe>
+        <p>Badgers rock.</p>
+    </div>
+    <script>
+        const imageLinks = [
+            "https://drive.google.com/file/d/13e9OCIIWA8oLAKac-Tk7PiMSK0XYJZlQ/preview",
+            "https://drive.google.com/file/d/1FETD8V40JMjecU1B3CvwudjKkM6jxtE0/preview",
+            "https://drive.google.com/file/d/13e9OCIIWA8oLAKac-Tk7PiMSK0XYJZlQ/preview",
+            "https://drive.google.com/file/d/1-LbW7lTWmMF0BFLaIl_KluVGe3XIUwn2/preview",
+            "https://drive.google.com/file/d/1mUSs3USU45GN9BVu0aUh9EBEoHB4NnGn/preview"
+        ]
+        function calculate() {
+            let num1 = document.querySelector("#input1").value
+            let num2 = document.querySelector("#input2").value
+            document.querySelector("#output-image").src = imageLinks[num1 - num2]
+        }
+    </script>
+</body>
+</html>
