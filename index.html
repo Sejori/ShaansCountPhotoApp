@@ -4,46 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shaan's Count App</title>
+    <style>
+        strong {font-size: 22px;}
+    </style>
 </head>
-<body style="width: 100vw; height: 100vh; display: flex; font-family: Arial, Helvetica, sans-serif;">
-    <div style="margin: auto;">
-        <div style="display: flex; justify-content: space-evenly;">
-            <div>
-                <p>Input number 1:</p>
-                <select id="input1" onChange="calculate()">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
+<body style="width: 100%; height: 100%; display: flex; flex-direction: column; font-family: Arial, Helvetica, sans-serif; margin: 0; background-image: url(./background.png); background-size: cover; background-repeat: no-repeat; background-color: #f4bc1c;">
+    <div style="display: flex; flex-direction: row-reverse; align-items: center; justify-content: center; flex-wrap: wrap; margin: auto; padding-top: 3rem;">
+        <div style="background-image: url(./images/Frame.png); background-size: cover; margin-left: 2rem; padding: 63px; width: 330px; height: 330px;">
+            <img id="output-image" src="./images/Holding.png" alt="output-image" style=" width: 330px; height: 330px;">
+        </div>
+        <div style="margin-top: 6rem;">
+            <div style="display: flex; width: 450px; height: 400px; flex-direction: column; justify-content: space-evenly;">
+                <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                    <strong>Your desired device</strong>
+                    <select id="input" required style="border: solid; border-radius: 0px; border-width: 2px; height: 40px; width: 150px; background-color: white; box-shadow: inset 0px 0px 2px #707070;">
+                        <option value="" selected disabled hidden>Select your device</option>
+                        <option value="0">iPhone XS Max</option>
+                        <option value="1">Huawei P30 Pro</option>
+                        <option value="2">Samsung Galaxy S10</option>
+                        <option value="3">Google Pixel 3</option>
+                        <option value="4">iPhone X</option>
+                    </select>
+                </div>
+                <div style="width: 100%; display: flex; justify-content: flex-end;">
+                    <img style="height: 30px" src="./images/button.png" onClick="calculate()">
+                </div>
+                <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                    <strong>What we've got for you</strong>
+                    <div id="output1" style="display: flex; align-items: center; justify-content: center; border: solid; border-width: 2px; height: 40px; width: 150px; background-color: white; box-shadow: inset 0px 0px 2px #707070;"></div>
+                </div>
+                <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+                    <strong>What you've saved</strong>
+                    <div id="output2" style="display: flex; align-items: center; justify-content: center; border: solid; border-width: 2px; height: 40px; width: 150px; background-color: white; box-shadow: inset 0px 0px 2px #707070;"></div>
+                </div>
             </div>
-            <div>
-                <p>Input number 2:</p>
-                <select id="input2" onChange="calculate()">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
+            <div style="width: 600px; height: 200px;">
+                <strong id="output3"></strong>
+                <p id="output4"></p>
+                <p style="width: 500px; font-size: 8px">Savings calculated based on current prices for new and refurbished devices. Device prices from 02 and GiffGaff 2019.</p>
+                <p style="width: 500px; font-size: 8px">The experiences shown are suggestions only based on national averages (UK only) and average prices of third party service providers. Should you want to spend your money on something else, well, that's fine by us. Enjoy, you've earned it!</p>
             </div>
         </div>
-        <iframe id="output-image" src="" alt="output-image" style="margin: 1rem; width: 300px; height: 240px;"></iframe>
-        <p>Badgers rock.</p>
     </div>
     <script>
         const imageLinks = [
-            "https://drive.google.com/file/d/13e9OCIIWA8oLAKac-Tk7PiMSK0XYJZlQ/preview",
-            "https://drive.google.com/file/d/1FETD8V40JMjecU1B3CvwudjKkM6jxtE0/preview",
-            "https://drive.google.com/file/d/13e9OCIIWA8oLAKac-Tk7PiMSK0XYJZlQ/preview",
-            "https://drive.google.com/file/d/1-LbW7lTWmMF0BFLaIl_KluVGe3XIUwn2/preview",
-            "https://drive.google.com/file/d/1mUSs3USU45GN9BVu0aUh9EBEoHB4NnGn/preview"
+            "./images/Gym.png",
+            "./images/Cinema.png",
+            "./images/Bungee.png",
+            "./images/Great-Nights.png",
+            "./images/Weekend-Away.png"
         ]
+        const output1Data = [
+            "LIKE NEW",
+            "LIKE NEW",
+            "LIKE NEW",
+            "LIKE NEW",
+            "GOOD"
+        ]
+        const output2Data = [
+            "£440",
+            "£350",
+            "£160",
+            "£220",
+            "£450"
+        ]
+        const output3Data = [
+            "Brilliant! You’ve saved enough to pay for 11 month’s worth of pumping iron, running on a treadmill and generally being healthier and happier.",
+            "Upgrades! You’ve just saved yourself the price of 48.5436893 trips to the cinema! Go enjoy the sweet escapism. Maybe you could get yourself a drink on the 0.5436893 or treat yourself to a fresh pair of 3D glasses. The world is your oyster! Don’t forget to put your phone on silent.",
+            "You took the plunge and you can reward yourself with a plunge. Just saved enough to splash out on a 3.2 bungee jumps, indoor or outdoor.",
+            "You’re a legend! Great nights in await you because you’ve just saved 26.4 month’s worth of streaming service fees. Yes, that’s a bit more than 2 years! Kerrchiinng!",
+            "Congratulations! You’ve just solved your weekend plans. Saved enough to fly to Scotland and stay in a lovely hotel for 3 nights, for two, and do that twice, if the first time wasn’t enough. Does that sound confusing? You’ve saved enough to take whoever you like on a long weekend and, of course, it doesn’t have to be Scotland."
+        ]
+        const output4Data = [
+            "(Calculated at the UK average cost of £40/month in 2019 for memberships. We know there are cheaper options, so go ahead, join one now.)",
+            "(Calculated based on the average UK cinema ticket price for 2018 - £7.21)",
+            "(Calculated at the cost of £50/jump. You could pay more to jump from higher. Or just do something totally different)",
+            "(Calculated at the average of £8.32/month – Netflix, Now TV, Amazon Prime Video. UK only. Prices as of January 2020)",
+            "(Calculated at the average cost of £202 for a 3 night stay near Loch Ness, Scotland with lastminute.com)"
+
+        ]
+
         function calculate() {
-            let num1 = document.querySelector("#input1").value
-            let num2 = document.querySelector("#input2").value
-            document.querySelector("#output-image").src = imageLinks[num1 - num2]
+            document.querySelector("#output-image").src = imageLinks[document.querySelector('#input').value]
+            document.querySelector("#output1").textContent = output1Data[document.querySelector('#input').value]
+            document.querySelector("#output2").textContent = output2Data[document.querySelector('#input').value]
+            document.querySelector("#output3").textContent = output3Data[document.querySelector('#input').value]
+            document.querySelector("#output4").textContent = output4Data[document.querySelector('#input').value]
         }
     </script>
 </body>
